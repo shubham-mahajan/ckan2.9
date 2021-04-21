@@ -32,7 +32,7 @@ RUN apt-get -q -y update \
 ENV CKAN_HOME /usr/lib/ckan
 ENV CKAN_VENV $CKAN_HOME/venv
 ENV CKAN_CONFIG /etc/ckan
-ENV CKAN_STORAGE_PATH=/var/lib/ckan
+# ENV CKAN_STORAGE_PATH=/var/lib/ckan
 ENV CKAN_EXTENSIONS $CKAN_HOME/src_extensions
 
 # Build-time variables specified by docker-compose.yml / .env
