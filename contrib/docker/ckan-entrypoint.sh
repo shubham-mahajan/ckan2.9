@@ -40,10 +40,12 @@ write_config () {
   ckan-paster make-config --no-interactive ckan "$CONFIG"
 }
 
+env
 # Wait for PostgreSQL
-while ! pg_isready -h db -U ckan; do
-  sleep 1;
-done
+# while ! pg_isready -h db -U ckan; do
+    
+#   sleep 1;
+# done
 
 # If we don't already have a config file, bootstrap
 if [ ! -e "$CONFIG" ]; then
@@ -51,22 +53,21 @@ if [ ! -e "$CONFIG" ]; then
 fi
 
 # Get or create CKAN_SQLALCHEMY_URL
-if [ -z "$CKAN_SQLALCHEMY_URL" ]; then
-  abort "ERROR: no CKAN_SQLALCHEMY_URL specified in docker-compose.yml"
-fi
+# if [ -z "$CKAN_SQLALCHEMY_URL" ]; then
+#   abort "ERROR: no CKAN_SQLALCHEMY_URL specified in docker-compose.yml"
+# fi
 
-if [ -z "$CKAN_SOLR_URL" ]; then
-    abort "ERROR: no CKAN_SOLR_URL specified in docker-compose.yml"
-fi
+# if [ -z "$CKAN_SOLR_URL" ]; then
+#     abort "ERROR: no CKAN_SOLR_URL specified in docker-compose.yml"
+# fi
 
-if [ -z "$CKAN_REDIS_URL" ]; then
-    abort "ERROR: no CKAN_REDIS_URL specified in docker-compose.yml"
-fi
+# if [ -z "$CKAN_REDIS_URL" ]; then
+#     abort "ERROR: no CKAN_REDIS_URL specified in docker-compose.yml"
+# fi
 
-if [ -z "$CKAN_DATAPUSHER_URL" ]; then
-    abort "ERROR: no CKAN_DATAPUSHER_URL specified in docker-compose.yml"
-fi
+# if [ -z "$CKAN_DATAPUSHER_URL" ]; then
+#     abort "ERROR: no CKAN_DATAPUSHER_URL specified in docker-compose.yml"
+# fi
 
 set_environment
-ckan-paster --plugin=ckan db init -c "${CKAN_CONFIG}/production.ini"
 exec "$@"
