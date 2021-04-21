@@ -2,28 +2,28 @@
 echo "Looking for local extensions to install..."
 echo "Extension dir contents new:"
 
-ls -la /usr/lib/ckan/src_extensions
+ls -la $CKAN_EXTENSIONS
 echo "Activate Virtual ENV"
 source "${CKAN_VENV}/bin/activate"
 
-for i in /usr/lib/ckan/src_extensions/*
+for i in $CKAN_EXTENSIONS/*
 do
     if [ -d $i ];
     then
 
         if [ -f $i/pip-requirements.txt ];
         then
-            pip install -r $i/pip-requirements.txt
+            ckan-pip install -r $i/pip-requirements.txt
             echo "Found requirements file in $i"
         fi
         if [ -f $i/requirements.txt ];
         then
-            pip install -r $i/requirements.txt
+            ckan-pip install -r $i/requirements.txt
             echo "Found requirements file in $i"
         fi
         if [ -f $i/dev-requirements.txt ];
         then
-            pip install -r $i/dev-requirements.txt
+            ckan-pip install -r $i/dev-requirements.txt
             echo "Found dev-requirements file in $i"
         fi
         if [ -f $i/setup.py ];

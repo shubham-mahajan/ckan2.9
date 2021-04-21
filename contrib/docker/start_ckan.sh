@@ -6,4 +6,4 @@ ckan --config "${CKAN_CONFIG}/production.ini" db init
 
 echo "Starting CKAN"
 
-ckan -c /etc/ckan/production.ini run --host 0.0.0.0
+ckan -c ${CKAN_CONFIG}/production.ini run --host 0.0.0.0
